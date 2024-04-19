@@ -67,15 +67,30 @@ public class DashBoard extends javax.swing.JFrame {
         btnModificacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnModificacion.setText("Modificacion de Vehiculos");
         btnModificacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificacionActionPerformed(evt);
+            }
+        });
 
         btnEliminacion.setBackground(new java.awt.Color(255, 255, 254));
         btnEliminacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEliminacion.setText("Eliminacion de Vehiculos");
         btnEliminacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEliminacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminacionActionPerformed(evt);
+            }
+        });
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 254));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pMenuLayout = new javax.swing.GroupLayout(pMenu);
         pMenu.setLayout(pMenuLayout);
@@ -166,6 +181,20 @@ public class DashBoard extends javax.swing.JFrame {
         VistaVehiculo panel = new VistaVehiculo();
         pintarPanel(panel);
     }//GEN-LAST:event_btnVistaActionPerformed
+
+    private void btnModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionActionPerformed
+        ModiVehiculo panel = new ModiVehiculo();
+        pintarPanel(panel);
+    }//GEN-LAST:event_btnModificacionActionPerformed
+
+    private void btnEliminacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminacionActionPerformed
+        EliminarVehiculo panel = new EliminarVehiculo();
+        pintarPanel(panel);
+    }//GEN-LAST:event_btnEliminacionActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
