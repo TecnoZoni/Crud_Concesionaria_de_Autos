@@ -1,9 +1,16 @@
 package com.mycompany.autovilescrud.igu;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 public class DashBoard extends javax.swing.JFrame {
 
     public DashBoard() {
         initComponents();
+
+        AltaVehiculo panel = new AltaVehiculo();
+        pintarPanel(panel);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -22,7 +29,6 @@ public class DashBoard extends javax.swing.JFrame {
         pPaneles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1000, 650));
         setMinimumSize(new java.awt.Dimension(1000, 650));
         setResizable(false);
 
@@ -35,17 +41,27 @@ public class DashBoard extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Consesionaria Nitsuga");
+        jLabel2.setText("Concesionaria Nitsuga");
 
         btnAlta.setBackground(new java.awt.Color(255, 255, 254));
         btnAlta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAlta.setText("Alta de Vehiculo");
         btnAlta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnVista.setBackground(new java.awt.Color(255, 255, 254));
         btnVista.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnVista.setText("Vista de Vehiculos");
         btnVista.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnVista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVistaActionPerformed(evt);
+            }
+        });
 
         btnModificacion.setBackground(new java.awt.Color(255, 255, 254));
         btnModificacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -141,6 +157,16 @@ public class DashBoard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        AltaVehiculo panel = new AltaVehiculo();
+        pintarPanel(panel);
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnVistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVistaActionPerformed
+        VistaVehiculo panel = new VistaVehiculo();
+        pintarPanel(panel);
+    }//GEN-LAST:event_btnVistaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminacion;
@@ -153,4 +179,14 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel pMenu;
     private javax.swing.JPanel pPaneles;
     // End of variables declaration//GEN-END:variables
+
+    private void pintarPanel(JPanel p) {
+        p.setSize(694, 666);
+        p.setLocation(0, 0);
+
+        pPaneles.removeAll();
+        pPaneles.add(p, BorderLayout.CENTER);
+        pPaneles.revalidate();
+        pPaneles.repaint();
+    }
 }
