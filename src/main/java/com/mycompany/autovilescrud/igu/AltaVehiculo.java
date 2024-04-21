@@ -1,9 +1,20 @@
 package com.mycompany.autovilescrud.igu;
 
+import com.mycompany.autovilescrud.logica.Auto;
+import com.mycompany.autovilescrud.logica.Controladora;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 public class AltaVehiculo extends javax.swing.JPanel {
 
-    public AltaVehiculo() {
+    Controladora control;
+    Mensaje mensaje;
+
+    public AltaVehiculo(Controladora control, Mensaje mensaje) {
         initComponents();
+        this.control = control;
+        this.mensaje = mensaje;
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +40,7 @@ public class AltaVehiculo extends javax.swing.JPanel {
         btnGuardar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVehiculo = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(694, 666));
         setPreferredSize(new java.awt.Dimension(694, 666));
@@ -162,7 +173,7 @@ public class AltaVehiculo extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -173,7 +184,7 @@ public class AltaVehiculo extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVehiculo);
 
         javax.swing.GroupLayout pFondoLayout = new javax.swing.GroupLayout(pFondo);
         pFondo.setLayout(pFondoLayout);
@@ -212,11 +223,25 @@ public class AltaVehiculo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        try {
+        String modelo = txtModelo.getText();
+        String marca = txtMarca.getText();
+        String motor = txtMotor.getText();
+        String color = txtColor.getText();
+        String patente = txtPatente.getText();
+        int puertas = Integer.parseInt(txtPuertas.getText());
+
+            control.guardarAuto(modelo, marca, motor, color, patente, puertas);
+            mensaje.mostrarMensaje("Auto guradado con exito", "Info", "Guardado exitoso");
+            cargarTabla();
+            limpiar();
+        } catch (Exception e) {
+            mensaje.mostrarMensaje("El Auto no pudo guardarse, chequée los datos", "Error", "Error al Guardar");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
@@ -231,9 +256,9 @@ public class AltaVehiculo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pFondo;
     private javax.swing.JPanel pTitle;
+    private javax.swing.JTable tablaVehiculo;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtMarca;
@@ -242,4 +267,35 @@ public class AltaVehiculo extends javax.swing.JPanel {
     private javax.swing.JTextField txtPatente;
     private javax.swing.JTextField txtPuertas;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTabla() {
+        DefaultTableModel tabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        String titulos[] = {"Id","Modelo", "MaRca", "Motor", "Color", "Patente", "Can.Puertas"};
+        tabla.setColumnIdentifiers(titulos);
+
+        List<Auto> listaAutos = control.traerVehiculos();
+
+        if (listaAutos != null) {
+            for (Auto auto : listaAutos) {
+                Object[] objeto = {auto.getId(),auto.getModelo(), auto.getMarca(), auto.getMotor(), auto.getColor(), auto.getPatente(), auto.getCanPuertas()};
+                tabla.addRow(objeto);
+            }
+        }
+        tablaVehiculo.setModel(tabla);
+    }
+
+    private void limpiar() {
+        txtModelo.setText("");
+        txtMarca.setText("");
+        txtMotor.setText("");
+        txtColor.setText("");
+        txtPatente.setText("");
+        txtPuertas.setText("");
+    }
 }

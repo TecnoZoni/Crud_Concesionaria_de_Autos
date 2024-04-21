@@ -1,14 +1,18 @@
 package com.mycompany.autovilescrud.igu;
 
+import com.mycompany.autovilescrud.logica.Controladora;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 public class DashBoard extends javax.swing.JFrame {
 
+    Controladora control = new Controladora();
+    Mensaje mensaje = new Mensaje();
+
     public DashBoard() {
         initComponents();
 
-        AltaVehiculo panel = new AltaVehiculo();
+        AltaVehiculo panel = new AltaVehiculo(control, mensaje);
         pintarPanel(panel);
 
     }
@@ -22,7 +26,6 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnAlta = new javax.swing.JButton();
-        btnVista = new javax.swing.JButton();
         btnModificacion = new javax.swing.JButton();
         btnEliminacion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -37,8 +40,6 @@ public class DashBoard extends javax.swing.JFrame {
 
         pMenu.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Downloads\\carro-deportivo (1).png")); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Concesionaria Nitsuga");
@@ -50,16 +51,6 @@ public class DashBoard extends javax.swing.JFrame {
         btnAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaActionPerformed(evt);
-            }
-        });
-
-        btnVista.setBackground(new java.awt.Color(255, 255, 254));
-        btnVista.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVista.setText("Vista de Vehiculos");
-        btnVista.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnVista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVistaActionPerformed(evt);
             }
         });
 
@@ -105,7 +96,6 @@ public class DashBoard extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(btnModificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnVista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnEliminacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,14 +110,12 @@ public class DashBoard extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVista, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminacion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         pPaneles.setBackground(new java.awt.Color(255, 255, 255));
@@ -173,22 +161,17 @@ public class DashBoard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        AltaVehiculo panel = new AltaVehiculo();
+        AltaVehiculo panel = new AltaVehiculo(control, mensaje);
         pintarPanel(panel);
     }//GEN-LAST:event_btnAltaActionPerformed
 
-    private void btnVistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVistaActionPerformed
-        VistaVehiculo panel = new VistaVehiculo();
-        pintarPanel(panel);
-    }//GEN-LAST:event_btnVistaActionPerformed
-
     private void btnModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionActionPerformed
-        ModiVehiculo panel = new ModiVehiculo();
+        ModiVehiculo panel = new ModiVehiculo(control, mensaje);
         pintarPanel(panel);
     }//GEN-LAST:event_btnModificacionActionPerformed
 
     private void btnEliminacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminacionActionPerformed
-        EliminarVehiculo panel = new EliminarVehiculo();
+        EliminarVehiculo panel = new EliminarVehiculo(control, mensaje);
         pintarPanel(panel);
     }//GEN-LAST:event_btnEliminacionActionPerformed
 
@@ -201,7 +184,6 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminacion;
     private javax.swing.JButton btnModificacion;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnVista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel pFondo;
